@@ -32,6 +32,8 @@ echo $carMarge->forward() . '<br>';
 echo 'Mon nouveau niveau d\'energy est : ' . $carMarge->getEnergyLevel() . '<br>';
 echo $carMarge->brake() . '<br>';
 
+echo 'blabla';
+
 
 
 
