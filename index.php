@@ -1,39 +1,64 @@
 <?php
-require 'Bicycle.php';
-require 'SimpsonsCars.php';
 
-// $bike = new Bicycle();
-// $bike->color = 'blue';
-// $bike->currentSpeed = 0;
-// var_dump($bike);
-// echo $bike->forward();
-// echo '<br> Vitesse du vélo : ' . $bike->currentSpeed . 'km/h' . '<br>';
-// echo $bike->brake();
-// echo '<br> Vitesse du vélo : ' . $bike->currentSpeed . 'km/h' . '<br>';
-// echo $bike->brake();
+/*Récupération du fichier de la classe*/
+require_once 'Bicycle.php';
+require_once 'Car.php';
+
+/*Instanciation d'un nouvel objet de la classe Bicycle*/
+$bike = new Bicycle('pink');
+var_dump($bike);
+
+/*Modification des propriétés depuis l'extérieur de la classe
+- Sans le $
+- Avec ->*/
+$bike->setColor('blue');
+var_dump($bike);
+
+
+/*Appel de la méthode, avec le nom de l'instance
+- Pour une vue, on fait un echo*/
+echo $bike->forward();
+echo $bike->setCurrentSpeed(30);
+echo '<br> Vitesse du vélo : ' . $bike->getCurrentSpeed() . ' km/h' . '<br>';
+echo $bike->brake();
+echo '<br> Vitesse du vélo : ' . $bike->getCurrentSpeed() . ' km/h' . '<br>';
+echo $bike->brake();
 
 // Instanciation d'un nouvel objet $rockrider
-// $rockrider = new Bicycle();
-// $rockrider->color = 'yellow';
+$rockrider = new Bicycle('black');
+var_dump($rockrider);
+$rockrider->setColor('yellow');
+var_dump($rockrider);
 
-// Instanciation d'un nouvel objet $tornado
-// $tornado = new Bicycle();
-// $tornado->color = 'black';
+/*Appel de la méthode, avec le nom de l'instance
+- Pour une vue, on fait un echo*/
+echo $rockrider->forward();
+echo $rockrider->setCurrentSpeed(50);
+echo '<br>' . $rockrider->getCurrentSpeed() . '<br>';
+echo $rockrider->brake();
+echo '<br>' . $rockrider->getCurrentSpeed() . '<br>';
 
-// $tornado->forward();
+// var_dump($rockrider);
+// $rockrider->dump();
 
-$carMarge = new SimpsonsCars('blue', 4, 'diesel');
-$carBart = new SimpsonsCars('red', 6, 'electric');
-var_dump($carMarge, $carBart);
+// var_dump($bike);
+// $bike->dump();
 
-echo $carMarge->start() . '<br>';
-echo 'Mon nouveau niveau d\'energy est : ' . $carMarge->getEnergyLevel() .  '<br>';
-echo $carMarge->forward() . '<br>';
-echo 'Mon nouveau niveau d\'energy est : ' . $carMarge->getEnergyLevel() . '<br>';
-echo $carMarge->brake() . '<br>';
+/*Instanciation d'un nouvel objet de la classe Car*/
 
-echo 'blabla';
+$coccinelle = new Car('white', 4, 'gasoil');
+var_dump($coccinelle);
 
+echo $coccinelle->setColor('green');
+// var_dump($coccinelle);
+echo $coccinelle->setEnergyLevel(75);
+
+// var_dump($coccinelle);
+echo $coccinelle->start();
+echo $coccinelle->setCurrentSpeed(80);
+echo $coccinelle->forward();
+// echo $coccinelle->getEnergyLevel();
+echo $coccinelle->brake();
 
 
 
