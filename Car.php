@@ -1,65 +1,46 @@
 <?php
 
-class Car
+require_once 'Vehicle.php';
 
-{
+class Car extends Vehicle
+
+{   
+    /*Constante de classe
+    - On peut appeler une constante de classe dans la classe, on utilise self::
+    - On peut appeler une constante de classe depuis l'extérieur sans que celle-ci 
+    soit instanciée, on utilise l'opérateur :
+    - On peut appeler dans index.php la constante ALLOWED_ENERGIES sans instancier une voiture par exemple.*/
+    public const ALLOWED_ENERGIES = [
+        'fuel',
+        'electric',
+    ];
+
     /*Propriétes*/
-    private int $nbWheels;
-    private int $currentSpeed;
-    private string $color;
-    private int $nbSeats;
     private string $energy;
     private int $energylevel;
+    private string $brand;
 
     /*Methodes*/
-
-    public function __construct(string $color, int $nbSeats,string $energy)
+    public function __construct(string $color, int $nbSeats, string $energy, string $brand)
     {
-        $this->color = $color;
-        $this->nbSeats = $nbSeats;
-        $this->energy = $energy;
+        /* On utilise le constructeur du parent afin de ne pas répéter la même méthode ici
+        -> on peut avec le mot parent appeler n'importe quelle méthode d'une classe parent*/
+        // $this->color = $color;
+        // $this->nbSeats = $nbSeats;
+        parent::__construct($color, $nbSeats);
+        // $this->energy = $energy;
+        $this->setEnergy($energy);
+        $this->brand = $brand;
     }
 
-    public function getNbWheels(): int
+    public function getBrand(): string
     {
-        return $this->nbWheels;
+        return $this->brand;
     }
 
-    public function setNbWheels($nbWheels): void
+    public function setBrand($brand): void
     {
-        $this->nbWheels = $nbWheels;
-    }
-
-    public function getCurrentSpeed(): int
-    {
-        return $this->currentSpeed;
-    }
-
-    public function setCurrentSpeed($currentSpeed): void
-    {
-        if($currentSpeed >= 0) {
-            $this->currentSpeed = $currentSpeed;
-        }
-    }
-
-    public function getColor(): string
-    {
-        return $this->color;
-    }
-
-    public function setColor($color): void
-    {
-        $this->color = $color;
-    }
-
-    public function getNbSeats(): int
-    {
-        return $this->nbSeats;
-    }
-
-    public function setNbSeats($nbSeats): void
-    {
-        $this->nbSeats = $nbSeats;
+        $this->brand = $brand;
     }
 
     public function getEnergy(): string
@@ -67,9 +48,17 @@ class Car
         return $this->energy;
     }
 
-    public function setEnergy($energy): void
+    public function setEnergy($energy): Car
     {
-        $this->energy = $energy;
+        /*On vérifie si l'énergie passée en paramètre de la méthode est bien
+        dans le tableau de la constante de classe ALLOWED_ENERGIES 
+        - self:: = pour appeler la constante dans la classe, représente la classe (la constante est propre 
+        à la classe et non à l'objet)
+        - $this = représente l'instance en cours de la classe*/
+        if (in_array($energy, self::ALLOWED_ENERGIES)) {
+            $this->energy = $energy;
+        }
+        return $this;
     }
 
     public function getEnergyLevel(): int
@@ -80,42 +69,6 @@ class Car
     public function setEnergyLevel($energyLevel): void
     {
         $this->energyLevel = $energyLevel;
-    }
-
-    public function forward(): string
-    {
-        if($this->currentSpeed > 60){
-            $this->energyLevel-=10;
-            return 'Ralentissez vous consommez trop ! Votre niveau est de : ' . $this->getEnergyLevel() .  '<br>';
-        }
-      
-        // $this->currentSpeed = 30;
-        // return 'ça roule !<br>';
-    }
-
-    public function brake(): string
-    {
-        $sentence = "";
-        while ($this->currentSpeed > 0) {
-            $this->currentSpeed-=10;
-            $sentence .= "ça freine !!!<br>";
-        }
-        $sentence .= "<br>Arrêt de votre véhicule !";
-        return $sentence;
-    }
-
-    public function start(): string
-    {
-        if($this->energyLevel == 0) {
-            return '<br>Vous ne pouvez pas démarrer ! vous êtes à sec, votre niveau est de : ' . $this->getEnergyLevel() . ' litres<br>';
-        }
-        if($this->energyLevel <= 20) {
-            return '<br>Vous n\'irez pas loin, vous êtes presque à sec, votre niveau est de : ' . $this->getEnergyLevel() . ' litres<br>';
-        }
-        if($this->energyLevel > 20) { 
-            return '<br>Bonne route ! Votre niveau est de :  ' . $this->getEnergyLevel() . ' litres<br>';
-        }
-
     }
 
 }

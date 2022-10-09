@@ -3,62 +3,42 @@
 /*Récupération du fichier de la classe*/
 require_once 'Bicycle.php';
 require_once 'Car.php';
+require_once 'Truck.php';
 
 /*Instanciation d'un nouvel objet de la classe Bicycle*/
-$bike = new Bicycle('pink');
-var_dump($bike);
+$bmxLisa = new Bicycle('gold', 1);
+/*Appel de la méthode forward()*/
+echo $bmxLisa->forward();
+var_dump($bmxLisa);
 
-/*Modification des propriétés depuis l'extérieur de la classe
-- Sans le $
-- Avec ->*/
-$bike->setColor('blue');
-var_dump($bike);
-
-
-/*Appel de la méthode, avec le nom de l'instance
-- Pour une vue, on fait un echo*/
-echo $bike->forward();
-echo $bike->setCurrentSpeed(30);
-echo '<br> Vitesse du vélo : ' . $bike->getCurrentSpeed() . ' km/h' . '<br>';
-echo $bike->brake();
-echo '<br> Vitesse du vélo : ' . $bike->getCurrentSpeed() . ' km/h' . '<br>';
-echo $bike->brake();
-
-// Instanciation d'un nouvel objet $rockrider
-$rockrider = new Bicycle('black');
-var_dump($rockrider);
-$rockrider->setColor('yellow');
-var_dump($rockrider);
-
-/*Appel de la méthode, avec le nom de l'instance
-- Pour une vue, on fait un echo*/
-echo $rockrider->forward();
-echo $rockrider->setCurrentSpeed(50);
-echo '<br>' . $rockrider->getCurrentSpeed() . '<br>';
-echo $rockrider->brake();
-echo '<br>' . $rockrider->getCurrentSpeed() . '<br>';
-
-// var_dump($rockrider);
-// $rockrider->dump();
-
-// var_dump($bike);
-// $bike->dump();
+var_dump(Car::ALLOWED_ENERGIES);
 
 /*Instanciation d'un nouvel objet de la classe Car*/
+$carBart = new Car('black', 4, 'electric', 'VolksWagen');
+echo $carBart->setColor('white');
+echo $carBart->forward();
+var_dump($carBart);
 
-$coccinelle = new Car('white', 4, 'gasoil');
-var_dump($coccinelle);
+/*Instanciation d'un nouvel objet de la classe Truck*/
+$truckHomer = new Truck(100, 'red', 2, 'fuel');
+var_dump($truckHomer);
+/*Appel de la méthode forward()*/
+echo $truckHomer->forward() . ' Homer';
+/*Modification du chargement initialement défini à 0*/
+echo $truckHomer->setLoad(50) . '<br>';
+/*Appel de la méthode isLoading() pour vérifier si le camion est plein ou non*/
+echo $truckHomer->isLoading();
 
-echo $coccinelle->setColor('green');
-// var_dump($coccinelle);
-echo $coccinelle->setEnergyLevel(75);
+/*Instanciation d'un nouvel objet de la classe Truck*/
+$truckMarge = new Truck(200, 'pink', 2, 'electric');
+var_dump($truckMarge);
+echo $truckMarge->forward() . ' Marge';
+echo $truckMarge->setLoad(200) . '<br>';
+echo $truckMarge->isLoading();
 
-// var_dump($coccinelle);
-echo $coccinelle->start();
-echo $coccinelle->setCurrentSpeed(80);
-echo $coccinelle->forward();
-// echo $coccinelle->getEnergyLevel();
-echo $coccinelle->brake();
+
+
+
 
 
 
