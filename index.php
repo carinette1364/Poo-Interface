@@ -1,40 +1,68 @@
 <?php
 
 /*Récupération du fichier de la classe*/
+require_once 'HighWay.php';
+require_once 'MotorWay.php';
+require_once 'PedestrianWay.php';
+require_once 'ResidentialWay.php';
+
+require_once 'Vehicle.php';
 require_once 'Bicycle.php';
 require_once 'Car.php';
+require_once 'Skateboard.php';
 require_once 'Truck.php';
 
-/*Instanciation d'un nouvel objet de la classe Bicycle*/
-$bmxLisa = new Bicycle('gold', 1);
-/*Appel de la méthode forward()*/
-echo $bmxLisa->forward();
-var_dump($bmxLisa);
+$motorWay = new MotorWay();
+$pedestrianWay = new PedestrianWay();
+$residentialWay = new ResidentialWay();
+// echo $motorWay::NB_LANE;
+// echo $motorWay->getNbLane();
 
-var_dump(Car::ALLOWED_ENERGIES);
+// var_dump($motorWay);
+// echo MotorWay::NB_LANE . '<br>' . PHP_EOL;
+// echo MotorWay::MAX_SPEED . '<br>' . PHP_EOL;
 
-/*Instanciation d'un nouvel objet de la classe Car*/
-$carBart = new Car('black', 4, 'electric', 'VolksWagen');
-echo $carBart->setColor('white');
-echo $carBart->forward();
-var_dump($carBart);
+//Instanciation de nouveaux objets véhicules
+$carBart = new Car('blue',4);
+$truckLisa = new Truck('red', 3);
+$bikeMaggie = new Bicycle('green', 1);
+$skateboardBart = new Skateboard('black', 1);
 
-/*Instanciation d'un nouvel objet de la classe Truck*/
-$truckHomer = new Truck(100, 'red', 2, 'fuel');
-var_dump($truckHomer);
-/*Appel de la méthode forward()*/
-echo $truckHomer->forward() . ' Homer';
-/*Modification du chargement initialement défini à 0*/
-echo $truckHomer->setLoad(50) . '<br>';
-/*Appel de la méthode isLoading() pour vérifier si le camion est plein ou non*/
-echo $truckHomer->isLoading();
 
-/*Instanciation d'un nouvel objet de la classe Truck*/
-$truckMarge = new Truck(200, 'pink', 2, 'electric');
-var_dump($truckMarge);
-echo $truckMarge->forward() . ' Marge';
-echo $truckMarge->setLoad(200) . '<br>';
-echo $truckMarge->isLoading();
+//Ajout de véhicules avec la méthode addVehicule sur différents types de chemins
+echo $residentialWay->addVehicle($carBart) . '<br>' . PHP_EOL;
+echo $residentialWay->addVehicle($bikeMaggie) . '<br>' . PHP_EOL;
+echo $motorWay->addVehicle($bikeMaggie) . '<br>' . PHP_EOL;
+echo $motorWay->addVehicle($carBart) . '<br>' . PHP_EOL;
+echo $pedestrianWay->addVehicle($bikeMaggie) . '<br>' . PHP_EOL;
+echo $pedestrianWay->addVehicle($carBart) . '<br>' . PHP_EOL;
+echo $pedestrianWay->addVehicle($skateboardBart) . '<br>' . PHP_EOL;
+
+//Récupération du tableau d'objets getCurrentVehicles
+$wayVehicles = $pedestrianWay->getCurrentVehicles();
+//Exemple pour récupérer les couleurs des vehicules présents dans ce type de chemin
+foreach ($wayVehicles as $item) {
+
+        echo $item->getColor() . '<br>' . PHP_EOL;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
