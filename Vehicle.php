@@ -7,17 +7,22 @@ class Vehicle
     */
     protected string $color;
 
-    protected int $currentSpeed;
+    protected int $currentSpeed = 0;
+
+    protected bool $light;
 
     protected int $nbSeats;
 
     protected int $nbWheels;
+
+    
 
     /*Méthodes*/
     public function __construct(string $color, int $nbSeats)
     {
         $this->color = $color;
         $this->nbSeats = $nbSeats;
+        
     }
 
     public function forward(): string
@@ -80,5 +85,8 @@ class Vehicle
     {
         $this->nbWheels = $nbWheels;
     }
+
+    
+
 
 }
